@@ -66,6 +66,8 @@ def show_pokemon(request, pokemon_id):
         'img_url': request.build_absolute_uri(requested_pokemon.picture.url),
         'title_ru': requested_pokemon.title,
         'description': requested_pokemon.description,
+        'title_en': requested_pokemon.en_title,
+        'title_jp': requested_pokemon.jp_title
     }
     if requested_pokemon.parent:
         previous_evolution = {
@@ -80,11 +82,10 @@ def show_pokemon(request, pokemon_id):
     descendants = requested_pokemon.parent_to.all()
     if descendants:
         descendant = descendants[0]
-        print(descendant)
         next_evolution = {
             'next_evolution': {
-                'title_ru': descendant.title,
-                'pokemon_id': descendant.id,
+'title_ru': descendant.title,
+  'pokemon_id': descendant.id,
                 'img_url': descendant.picture.url
             }
         }
